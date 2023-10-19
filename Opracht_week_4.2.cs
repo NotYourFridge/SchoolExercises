@@ -121,61 +121,61 @@ namespace MyLinqVersions
     class Program
     {
 
-        public static void Main()
-        {
+        // public static void Main()
+        // {
 
-            List<object> mixedList = new List<object>
-        {
-            1,
-            "Hello",
-            3.14,
-            "World",
-            42,
-        };
+        //     List<object> mixedList = new List<object>
+        // {
+        //     1,
+        //     "Hello",
+        //     3.14,
+        //     "World",
+        //     42,
+        // };
 
-            // Gebruik Where met is om alleen de string-elementen te selecteren
-            IEnumerable<object> stringsOnly = mixedList.OfType<string>();
+        //     // Gebruik Where met is om alleen de string-elementen te selecteren
+        //     IEnumerable<object> stringsOnly = mixedList.OfType<string>();
 
-            foreach (object item in stringsOnly)
-            {
-                // Cast naar string om toegang te krijgen tot string-specifieke functionaliteit
-                string str = (string)item;
-                Console.WriteLine(str);
-            }
+        //     foreach (object item in stringsOnly)
+        //     {
+        //         // Cast naar string om toegang te krijgen tot string-specifieke functionaliteit
+        //         string str = (string)item;
+        //         Console.WriteLine(str);
+        //     }
 
-            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+        //     List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
 
-            // Test 1: Enkelvoudig item vinden
-            int result1 = numbers.MySingle(x => x == 3);
-            Console.WriteLine(result1); // Moet 3 afdrukken
+        //     // Test 1: Enkelvoudig item vinden
+        //     int result1 = numbers.MySingle(x => x == 3);
+        //     Console.WriteLine(result1); // Moet 3 afdrukken
 
-            // Test 2: Geen item gevonden
-            try
-            {
-                int result2 = numbers.MySingle(x => x == 10);
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message); // Moet "Er zijn geen items gevonden die voldoen aan de voorwaarde" afdrukken
-            }
+        //     // Test 2: Geen item gevonden
+        //     try
+        //     {
+        //         int result2 = numbers.MySingle(x => x == 10);
+        //     }
+        //     catch (InvalidOperationException ex)
+        //     {
+        //         Console.WriteLine(ex.Message); // Moet "Er zijn geen items gevonden die voldoen aan de voorwaarde" afdrukken
+        //     }
 
-            // Test 3: Meerdere overeenkomende items
-            try
-            {
-                int result3 = numbers.MySingle(x => x % 2 == 0);
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message); // Moet "Er zijn meer dan 1 items gevonden met dezelfde voorwaarde" afdrukken
-            }
+        //     // Test 3: Meerdere overeenkomende items
+        //     try
+        //     {
+        //         int result3 = numbers.MySingle(x => x % 2 == 0);
+        //     }
+        //     catch (InvalidOperationException ex)
+        //     {
+        //         Console.WriteLine(ex.Message); // Moet "Er zijn meer dan 1 items gevonden met dezelfde voorwaarde" afdrukken
+        //     }
 
 
-            List<int> number = new List<int> { 10, 20, 30, 40, 50 };
+        //     List<int> number = new List<int> { 10, 20, 30, 40, 50 };
 
-            double average = number.MyAverage();
+        //     double average = number.MyAverage();
 
-            Console.WriteLine($"Gemiddelde: {average}");
-        }
+        //     Console.WriteLine($"Gemiddelde: {average}");
+        // }
 
     }
 }

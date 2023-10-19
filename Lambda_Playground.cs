@@ -47,7 +47,7 @@ namespace L
         }
 
 
-        public static Func<int, string> even_or_odd = (n) => n % 2 == 0 ? "Even" : "Odd";
+        public static Func<int, string> even_or_odd = n => n % 2 == 0 ? "Even" : "Odd";
 
 
         public static Func<double, double, double> addDoubles = (a, b) => a + b;
@@ -60,6 +60,12 @@ namespace L
         {
             return x;
         }
+
+        public static Func<int,int> kwadraat = (a) => {
+            return a * a;
+        };
+
+        public static Func<int,int> kwadraat2 = (a) => a*a;
 
 
     }

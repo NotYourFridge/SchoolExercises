@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7Dw4HMyPBb/slSs9JaggBo/mUVKaqlZSEHkz+tzzqtOMHZIBCcefo8mxvCmRSz8F41qP58NV0r7KMbbyS1xbQQ==",
+  "dgSpecHash": "L0orf8CfhtazjTYvksDBHg6H1eg9X77mq7MYuWlf1eGErbfyRAzIwikwbolHdTwNyPXHx50cbI+PpG+JajfX4g==",
   "success": true,
   "projectFilePath": "C:\\Users\\MrFre\\PlayGroundC#\\PlayGroundC#.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.11\\microsoft.entityframeworkcore.analyzers.7.0.11.nupkg.sha512",
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.11\\microsoft.entityframeworkcore.design.7.0.11.nupkg.sha512",
+    "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.11\\microsoft.entityframeworkcore.inmemory.7.0.11.nupkg.sha512",
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.11\\microsoft.entityframeworkcore.relational.7.0.11.nupkg.sha512",
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\7.0.11\\microsoft.entityframeworkcore.sqlite.7.0.11.nupkg.sha512",
     "C:\\Users\\MrFre\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\7.0.11\\microsoft.entityframeworkcore.sqlite.core.7.0.11.nupkg.sha512",
