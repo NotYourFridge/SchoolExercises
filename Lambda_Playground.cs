@@ -67,6 +67,8 @@ namespace L
 
         public static Func<int,int> kwadraat2 = (a) => a*a;
 
+        public static int Method(int x) => x;
+
 
     }
 

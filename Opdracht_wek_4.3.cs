@@ -153,81 +153,81 @@ namespace verhuur
 public class MainClass
 {
 
-   public static void Main(string[] args)
-   {
+   // public static void Main(string[] args)
+   // {
 
-      using (var context = new VerhuurContext())
-      {
-         // Controleer of de database al is aangemaakt
-         if (!context.Database.EnsureCreated())
-         {
-            Console.WriteLine("De database bestaat al.");
-         }
-         else
-         {
-            Console.WriteLine("De database is aangemaakt.");
+   //    using (var context = new VerhuurContext())
+   //    {
+   //       // Controleer of de database al is aangemaakt
+   //       if (!context.Database.EnsureCreated())
+   //       {
+   //          Console.WriteLine("De database bestaat al.");
+   //       }
+   //       else
+   //       {
+   //          Console.WriteLine("De database is aangemaakt.");
 
-            // Voeg hier code toe om huurders en verhuurders aan te maken
-            var huurder1 = new Huurder
-            {
-               gebruiker_naam = "Huurder1",
-               gebruiker_telefoonnummer = 123456789,
-               gebruiker_email = "huurder1@example.com",
-               adres = "Adres van Huurder1"
-            };
+   //          // Voeg hier code toe om huurders en verhuurders aan te maken
+   //          var huurder1 = new Huurder
+   //          {
+   //             gebruiker_naam = "Huurder1",
+   //             gebruiker_telefoonnummer = 123456789,
+   //             gebruiker_email = "huurder1@example.com",
+   //             adres = "Adres van Huurder1"
+   //          };
 
-            var huurder2 = new Huurder
-            {
-               gebruiker_naam = "Huurder2",
-               gebruiker_telefoonnummer = 123456710,
-               gebruiker_email = "huurder2@example.com",
-               adres = "Adres van Huurder2"
-            };
+   //          var huurder2 = new Huurder
+   //          {
+   //             gebruiker_naam = "Huurder2",
+   //             gebruiker_telefoonnummer = 123456710,
+   //             gebruiker_email = "huurder2@example.com",
+   //             adres = "Adres van Huurder2"
+   //          };
 
-            var verhuurder1 = new Verhuurder
-            {
-               gebruiker_naam = "Verhuurder1",
-               gebruiker_telefoonnummer = 123455789,
-               gebruiker_email = "verhuurder1@example.com",
-               adres = "Adres van Verhuurder1"
-            };
+   //          var verhuurder1 = new Verhuurder
+   //          {
+   //             gebruiker_naam = "Verhuurder1",
+   //             gebruiker_telefoonnummer = 123455789,
+   //             gebruiker_email = "verhuurder1@example.com",
+   //             adres = "Adres van Verhuurder1"
+   //          };
 
-            var verhuurder2 = new Verhuurder
-            {
-               gebruiker_naam = "Verhuurder1",
-               gebruiker_telefoonnummer = 123455799,
-               gebruiker_email = "verhuurder2@example.com",
-               adres = "Adres van Verhuurder2"
-            };
+   //          var verhuurder2 = new Verhuurder
+   //          {
+   //             gebruiker_naam = "Verhuurder1",
+   //             gebruiker_telefoonnummer = 123455799,
+   //             gebruiker_email = "verhuurder2@example.com",
+   //             adres = "Adres van Verhuurder2"
+   //          };
 
-            // Voeg meer huurders en verhuurders toe indien nodig...
+   //          // Voeg meer huurders en verhuurders toe indien nodig...
 
-            // Voeg de huurders en verhuurders toe aan de database
-            context.gebruikers.AddRange(huurder1 /*, voeg hier de andere gebruikers toe */);
-            context.SaveChanges();
-         }
-      }
+   //          // Voeg de huurders en verhuurders toe aan de database
+   //          context.gebruikers.AddRange(huurder1 /*, voeg hier de andere gebruikers toe */);
+   //          context.SaveChanges();
+   //       }
+   //    }
 
-      using (var context = new VerhuurContext())
-      {
-         // Controleer of de lijst van gebruikers niet null is
-         if (context.gebruikers != null)
-         {
-            // De lijst van gebruikers is niet null, voer hier je logica uit
-            foreach (var gebruiker in context.gebruikers)
-            {
-               Console.WriteLine("Gebruiker: " + gebruiker.gebruiker_naam);
-            }
-         }
-         else
-         {
-            // De lijst van gebruikers is null, voer hier eventuele foutafhandeling uit
-            Console.WriteLine("De lijst van gebruikers is null.");
-         }
-      }
+   //    using (var context = new VerhuurContext())
+   //    {
+   //       // Controleer of de lijst van gebruikers niet null is
+   //       if (context.gebruikers != null)
+   //       {
+   //          // De lijst van gebruikers is niet null, voer hier je logica uit
+   //          foreach (var gebruiker in context.gebruikers)
+   //          {
+   //             Console.WriteLine("Gebruiker: " + gebruiker.gebruiker_naam);
+   //          }
+   //       }
+   //       else
+   //       {
+   //          // De lijst van gebruikers is null, voer hier eventuele foutafhandeling uit
+   //          Console.WriteLine("De lijst van gebruikers is null.");
+   //       }
+   //    }
 
 
-   }
+   // }
 
 }
 
