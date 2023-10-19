@@ -32,7 +32,7 @@ namespace School
         {
             MyContext context = new MyContext();
             var Bob = new Student{Naam = "Bob"};
-            Bob.Grades.Add(new Grade{Value =9});
+            Bob.Grades.Add(new Grade{Value = 9});
             
 
         }

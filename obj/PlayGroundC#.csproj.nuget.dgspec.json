@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[4.20.69, )"
             },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            },
             "Xunit": {
               "target": "Package",
               "version": "[2.5.1, )"
