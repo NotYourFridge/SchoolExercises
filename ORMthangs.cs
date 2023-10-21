@@ -28,14 +28,14 @@ namespace School
     public class MainClass
     {
 
-        public static void Main(string[] args)
-        {
-            MyContext context = new MyContext();
-            var Bob = new Student{Naam = "Bob"};
-            Bob.Grades.Add(new Grade{Value = 9});
+        // public static void Main(string[] args)
+        // {
+        //     MyContext context = new MyContext();
+        //     var Bob = new Student{Naam = "Bob"};
+        //     Bob.Grades.Add(new Grade{Value = 9});
             
 
-        }
+        // }
 
     }
 

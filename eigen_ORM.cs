@@ -73,22 +73,22 @@ namespace ORM
 
     class Program
     {
-        static void Main(string[] args)
-        {
-            string connectionString = "your_connection_string_here";
-            StudentORM orm = new StudentORM(connectionString);
+        // static void Main(string[] args)
+        // {
+        //     string connectionString = "your_connection_string_here";
+        //     StudentORM orm = new StudentORM(connectionString);
 
-            // Voeg een student toe
-            Student newStudent = new Student { Name = "John", Age = 20, Education = "Computer Science" };
-            orm.InsertStudent(newStudent);
+        //     // Voeg een student toe
+        //     Student newStudent = new Student { Name = "John", Age = 20, Education = "Computer Science" };
+        //     orm.InsertStudent(newStudent);
 
-            // Haal de lijst van studenten op
-            List<Student> students = orm.GetStudents();
-            foreach (var student in students)
-            {
-                Console.WriteLine($"StudentId: {student.StudentId}, Name: {student.Name}, Age: {student.Age}, Education: {student.Education}");
-            }
-        }
+        //     // Haal de lijst van studenten op
+        //     List<Student> students = orm.GetStudents();
+        //     foreach (var student in students)
+        //     {
+        //         Console.WriteLine($"StudentId: {student.StudentId}, Name: {student.Name}, Age: {student.Age}, Education: {student.Education}");
+        //     }
+        // }
     }
 
 
