@@ -1,12 +1,18 @@
+using System.Collections.Specialized;
 using System.Net.Sockets;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Pretpark
 {
     class Program
     {
+
+        private static int counter = 0;
+
         static void Main(string[] args)
         {
+
             TcpListener server = new TcpListener(new System.Net.IPAddress(new byte[] { 127, 0, 0, 1 }), 5000);
             server.Start();
 
@@ -28,8 +34,6 @@ namespace Pretpark
 
         static void HandleHTTPRequests(Socket socket)
         {
-
-
             /*
             new NetworkStream(connectie): Dit is een constructoraanroep die een NetworkStream-object initialiseert met de socketverbinding connectie als parameter.
             NetworkStream is een klasse die in C# wordt gebruikt om gegevens te verzenden en ontvangen via een netwerksocket.
@@ -66,8 +70,81 @@ namespace Pretpark
                 char[] bytes = new char[(int)contentLength];
                 requestLezer.Read(bytes, 0, (int)contentLength);
             }
-            socket.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" + "<html><body><a href = 'https://nl.wikipedia.org/wiki/Den_Haag'>Welkom bij de website van Pretpark Den Haag!</a></body></html>"));
-            socket.Close();
+
+            if (regel1.Length >= 3)
+            {
+
+                if (methode == "GET" && url == "/contact")
+                {
+
+                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+                    response += "<html><body><a href='/'>Home</a></body></html>";
+
+                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+                    socket.Send(responseBytes);
+                    socket.Close();
+                }
+                else if (methode == "GET" && url == "/teller")
+                {
+                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+                    response += $"<html><body>Counter: {TellerTelOp()}</body></html>";
+
+                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+                    socket.Send(responseBytes);
+                    socket.Close();
+                }
+                else if (methode == "GET" && url.StartsWith("/add"))
+                {
+                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+                    response += $"<html><body>Som: {ParseQueryString(url)}</body></html>";
+
+                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+                    socket.Send(responseBytes);
+                    socket.Close();
+                }
+                else
+                {
+                    socket.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" + "<html><body><a href = 'https://nl.wikipedia.org/wiki/Den_Haag'>Welkom bij de website van Pretpark Den Haag!</a></body></html>"));
+                    socket.Send(System.Text.Encoding.ASCII.GetBytes("<html><body><br><a href='/contact'>Contact</a></body></html>"));
+                    socket.Close();
+                }
+
+            }
+
         }
+
+        static int TellerTelOp()
+        {
+            return counter++;
+        }
+
+        static int ParseQueryString(string request)
+        {
+            int a = 0, b = 0;
+            string[] queryParts = request.Split('?');
+            if (queryParts.Length == 2)
+            {
+                string queryString = queryParts[1];
+                string[] parameters = queryString.Split('&');
+
+                foreach (string parameter in parameters)
+                {
+                    string[] parts = parameter.Split('=');
+                    if (parts.Length == 2)
+                    {
+                        if (parts[0] == "a")
+                        {
+                            int.TryParse(parts[1], out a);
+                        }
+                        else if (parts[0] == "b")
+                        {
+                            int.TryParse(parts[1], out b);
+                        }
+                    }
+                }
+            }
+            return a + b;
+        }
+
     }
 }
