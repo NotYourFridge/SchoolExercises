@@ -102,6 +102,33 @@ namespace Pretpark
                     socket.Send(responseBytes);
                     socket.Close();
                 }
+                else if (methode == "GET" && url.StartsWith("/mijnteller"))
+                {
+                    string queryString = "?count=1";
+                    if (url.Contains("?count="))
+                    {
+                        int startIndex = url.IndexOf("?count=") + 7;
+                        int endIndex = url.IndexOf("&", startIndex);
+                        if (endIndex == -1)
+                        {
+                    
+                            endIndex = url.Length;
+                        }
+                        queryString = url.Substring(startIndex, endIndex - startIndex);
+                    }
+
+                    if (int.TryParse(queryString, out int count))
+                    {
+                        
+                        string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+                        response += $"<html><body>De teller staat op {count}, <a href='/mijnteller?count={count + 1}'>klik hier om te verhogen</a></body></html>";
+
+                        byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+                        socket.Send(responseBytes);
+                    }
+                    
+                    socket.Close();
+                }
                 else
                 {
                     socket.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" + "<html><body><a href = 'https://nl.wikipedia.org/wiki/Den_Haag'>Welkom bij de website van Pretpark Den Haag!</a></body></html>"));
@@ -144,6 +171,11 @@ namespace Pretpark
                 }
             }
             return a + b;
+        }
+
+        static int verhoog(int number)
+        {
+            return number++;
         }
 
     }
