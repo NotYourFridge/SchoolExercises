@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Net.Sockets;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
@@ -73,69 +74,33 @@ namespace Pretpark
 
             if (regel1.Length >= 3)
             {
-
-                if (methode == "GET" && url == "/contact")
+                if (methode == "GET")
                 {
-
-                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
-                    response += "<html><body><a href='/'>Home</a></body></html>";
-
-                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
-                    socket.Send(responseBytes);
-                    socket.Close();
-                }
-                else if (methode == "GET" && url == "/teller")
-                {
-                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
-                    response += $"<html><body>Counter: {TellerTelOp()}</body></html>";
-
-                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
-                    socket.Send(responseBytes);
-                    socket.Close();
-                }
-                else if (methode == "GET" && url.StartsWith("/add"))
-                {
-                    string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
-                    response += $"<html><body>Som: {ParseQueryString(url)}</body></html>";
-
-                    byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
-                    socket.Send(responseBytes);
-                    socket.Close();
-                }
-                else if (methode == "GET" && url.StartsWith("/mijnteller"))
-                {
-                    string queryString = "?count=1";
-                    if (url.Contains("?count="))
+                    if (url == "/contact")
                     {
-                        int startIndex = url.IndexOf("?count=") + 7;
-                        int endIndex = url.IndexOf("&", startIndex);
-                        if (endIndex == -1)
-                        {
-                    
-                            endIndex = url.Length;
-                        }
-                        queryString = url.Substring(startIndex, endIndex - startIndex);
+                        ToonContactPagina(socket);
                     }
-
-                    if (int.TryParse(queryString, out int count))
+                    else if (url == "/teller")
                     {
-                        
-                        string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
-                        response += $"<html><body>De teller staat op {count}, <a href='/mijnteller?count={count + 1}'>klik hier om te verhogen</a></body></html>";
-
-                        byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
-                        socket.Send(responseBytes);
+                        ToonTellerPagina(socket);
                     }
-                    
-                    socket.Close();
+                    else if (url.StartsWith("/add"))
+                    {
+                        ToonAddPagina(socket, url);
+                    }
+                    else if (url.StartsWith("/mijnteller"))
+                    {
+                        ToonMijnTellerPagina(socket, url);
+                    }
+                    else if (url == "/home")
+                    {
+                        ToonHomePagina(socket);
+                    }
+                    else
+                    {
+                        Generate404Page(socket);
+                    }
                 }
-                else
-                {
-                    socket.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" + "<html><body><a href = 'https://nl.wikipedia.org/wiki/Den_Haag'>Welkom bij de website van Pretpark Den Haag!</a></body></html>"));
-                    socket.Send(System.Text.Encoding.ASCII.GetBytes("<html><body><br><a href='/contact'>Contact</a></body></html>"));
-                    socket.Close();
-                }
-
             }
 
         }
@@ -176,6 +141,82 @@ namespace Pretpark
         static int verhoog(int number)
         {
             return number++;
+        }
+
+        static void ToonContactPagina(Socket socket)
+        {
+            string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+            response += "<html><body><a href='/home'>Home</a></body></html>";
+
+            byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+            socket.Send(responseBytes);
+            socket.Close();
+        }
+
+        static void ToonTellerPagina(Socket socket)
+        {
+            string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+            response += $"<html><body>Counter: {TellerTelOp()}</body></html>";
+
+            byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+            socket.Send(responseBytes);
+            socket.Close();
+        }
+
+        static void ToonAddPagina(Socket socket, string url)
+        {
+            string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+            response += $"<html><body>Som: {ParseQueryString(url)}</body></html>";
+
+            byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+            socket.Send(responseBytes);
+            socket.Close();
+        }
+
+        static void ToonMijnTellerPagina(Socket socket, string url)
+        {
+            string queryString = "?count=1";
+            if (url.Contains("?count="))
+            {
+                int startIndex = url.IndexOf("?count=") + 7;
+                int endIndex = url.IndexOf("&", startIndex);
+                if (endIndex == -1)
+                {
+
+                    endIndex = url.Length;
+                }
+                queryString = url.Substring(startIndex, endIndex - startIndex);
+            }
+
+            if (int.TryParse(queryString, out int count))
+            {
+
+                string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n";
+                response += $"<html><body>De teller staat op {count}, <a href='/mijnteller?count={count + 1}'>klik hier om te verhogen</a></body></html>";
+
+                byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+                socket.Send(responseBytes);
+            }
+
+            socket.Close();
+        }
+
+        static void ToonHomePagina(Socket socket)
+        {   
+            string response = "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" + "<html><body><a href = 'https://nl.wikipedia.org/wiki/Den_Haag'>Welkom bij de website van Pretpark Den Haag!</a></body></html>";
+            socket.Send(System.Text.Encoding.ASCII.GetBytes(response));
+            string response2 = "<html><body><br><a href='/contact'>Contact</a></body></html>";
+            socket.Send(System.Text.Encoding.ASCII.GetBytes(response2));
+            socket.Close();
+        }
+
+        static void Generate404Page(Socket socket)
+        {
+            string response = "HTTP/1.0 404 Not Found\r\nContent-Type: text/html\r\n\r\n";
+            response += "<html><body><h1>404 - Page Not Found</h1></body></html>";
+            byte[] responseBytes = System.Text.Encoding.ASCII.GetBytes(response);
+            socket.Send(responseBytes);
+            socket.Close();
         }
 
     }
